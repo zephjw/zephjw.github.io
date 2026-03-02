@@ -1,8 +1,5 @@
-
 <!DOCTYPE html>
 <html>
-
-
     <head>      
 
         <title>John Zephyr Portfolio</title>
@@ -15,7 +12,7 @@
         <h2> Android Health Application </h2>
         <b> Description </b><br>
             <p>
-               The Weight Tracker is an Android application built in Kotlin during my third year of the Computer Science program. Its purpose is to allow users to log their body weight over time, visualize trends via a                   line chart, and manage personal health data, including glucose, insulin, and sleep records. The application uses Android's Jetpack component suite, including Room for local persistence, Fragments for UI                    composition, and ViewModel for state management. The artifact selected for this category is the full application codebase, with specific focus on the Fragment layer, ViewModel, Repository pattern, and XML layout files.
+               The Weight Tracker is an Android application built in Kotlin during my third year of the Computer Science program. Its purpose is to allow users to log their body weight over time, visualize trends via a                   line chart, and manage personal health data, including glucose, insulin, and sleep records. The application uses Android's Jetpack component suite, including Room for local persistence, Fragments for UI                    composition, and ViewModel for state management. The artifact selected for this category is the full application codebase, with specific focus on the Fragment layer, ViewModel, Repository pattern, and XML                   layout files.
                 Specific enhancements I made to the Software Design and Engineering artifact:
                                 
                 •Replacing hardcoded dp dimensions across all layout files with `match_parent`, `wrap_content`, or `0dp` with constraints, making the UI responsive to different screen sizes and font scale settings.
