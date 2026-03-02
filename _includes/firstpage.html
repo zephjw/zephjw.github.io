@@ -13,38 +13,38 @@
             <h2>Software Design and Engineering</h2>
             
             <p>
-            The Weight Tracker is an Android application built in Kotlin during my third year
-            of the Computer Science program. The application allows users to log body weight,
-            visualize trends using a line chart, and manage health-related records such as
-            glucose, insulin, and sleep data.
+                The Weight Tracker is an Android application built in Kotlin during my third year
+                of the Computer Science program. The application allows users to log body weight,
+                visualize trends using a line chart, and manage health-related records such as
+                glucose, insulin, and sleep data.
             </p>
             
             <p>
-            The application follows the MVVM architecture pattern using:
+                The application follows the MVVM architecture pattern using:
             </p>
             
             <ul>
-            <li>Room for local persistence</li>
-            <li>Fragments for UI composition</li>
-            <li>ViewModel for state management</li>
-            <li>Repository pattern for separation of concerns</li>
+                <li>Room for local persistence</li>
+                <li>Fragments for UI composition</li>
+                <li>ViewModel for state management</li>
+                <li>Repository pattern for separation of concerns</li>
             </ul>
             
             <h3>Key Enhancements</h3>
             
             <ul>
-            <li>Replaced hardcoded <code>dp</code> dimensions with responsive constraints.</li>
-            <li>Replaced ListView with <code>MaterialButtonToggleGroup</code> for proper Material Design compliance.</li>
-            <li>Fixed missing <code>android:id</code> attributes causing potential NullPointerExceptions.</li>
-            <li>Implemented a proper Repository layer between ViewModel and DAO.</li>
-            <li>Fixed critical bug where <code>android.R.attr.height</code> was incorrectly stored in SharedPreferences.</li>
+                <li>Replaced hardcoded <code>dp</code> dimensions with responsive constraints.</li>
+                <li>Replaced ListView with <code>MaterialButtonToggleGroup</code> for proper Material Design compliance.</li>
+                <li>Fixed missing <code>android:id</code> attributes causing potential NullPointerExceptions.</li>
+                <li>Implemented a proper Repository layer between ViewModel and DAO.</li>
+                <li>Fixed critical bug where <code>android.R.attr.height</code> was incorrectly stored in SharedPreferences.</li>
             </ul>
             
             <h3>Reflection</h3>
             <p>
-            This enhancement process reinforced the distinction between code that runs and code
-            That is architecturally correct. Many issues were not immediately visible but would
-            surface under device variation or scaling conditions.
+                This enhancement process reinforced the distinction between code that runs and code
+                That is architecturally correct. Many issues were not immediately visible but would
+                surface under device variation or scaling conditions.
             </p>
         </section>
         
@@ -54,33 +54,33 @@
             <h2>Database Engineering (Room + SQLite)</h2>
             
             <p>
-            The database layer required a significant redesign. The original DAO contained
-            invalid Room annotations, improper return types, duplicate signatures, and
-            incorrect parameter bindings.
-            </p>
+                The database layer required a significant redesign. The original DAO contained
+                invalid Room annotations, improper return types, duplicate signatures, and
+                incorrect parameter bindings.
+                </p>
             
             <h3>Database Enhancements</h3>
             
             <ul>
-            <li>Redesigned <code>InitialUserData</code> entity using <code>Float</code> and a type-safe <code>Gender</code> enum.</li>
-            <li>Added foreign key relationship with CASCADE delete rule.</li>
-            <li>Added index on <code>userId</code> for query performance.</li>
-            <li>Created TypeConverter for enum persistence.</li>
-            <li>Reduced DAO from 30+ incorrect methods to minimal required operations.</li>
-            <li>Converted DAO methods to <code>suspend</code> functions.</li>
-            <li>Implemented reactive queries using <code>Flow&lt;List&lt;InitialUserData&gt;&gt;</code>.</li>
+                <li>Redesigned <code>InitialUserData</code> entity using <code>Float</code> and a type-safe <code>Gender</code> enum.</li>
+                <li>Added foreign key relationship with CASCADE delete rule.</li>
+                <li>Added index on <code>userId</code> for query performance.</li>
+                <li>Created TypeConverter for enum persistence.</li>
+                <li>Reduced DAO from 30+ incorrect methods to minimal required operations.</li>
+                <li>Converted DAO methods to <code>suspend</code> functions.</li>
+                <li>Implemented reactive queries using <code>Flow&lt;List&lt;InitialUserData&gt;&gt;</code>.</li>
             </ul>
             
             <h3>Example Query – Database-Level Sorting</h3>
             
             <pre><code>
-            @Query("SELECT * FROM weight_entries ORDER BY date ASC")
-            fun getAllEntriesAsc(): Flow&lt;List&lt;WeightEntry&gt;&gt;
+                @Query("SELECT * FROM weight_entries ORDER BY date ASC")
+                fun getAllEntriesAsc(): Flow&lt;List&lt;WeightEntry&gt;&gt;
             </code></pre>
             
             <p>
-            Sorting at the database layer ensures persistent chronological ordering and
-            maintains separation of concerns.
+                Sorting at the database layer ensures persistent chronological ordering and
+                maintains separation of concerns.
             </p>
             
             <p><strong>Time Complexity:</strong> O(n log n) (SQLite internal sort)</p>
@@ -95,27 +95,27 @@
             <h3>Search, Filter, and Sort</h3>
             
             <pre><code>
-            fun searchByDate(query: String) {
-                if (query.isBlank()) {
-                    loadAllEntries()
-                    return
+                fun searchByDate(query: String) {
+                    if (query.isBlank()) {
+                        loadAllEntries()
+                        return
+                    }
+                
+                    viewModelScope.launch {
+                        val results = repository.searchByDate(query)
+                        _entries.value = applySortOrder(results, _sortOrder.value)
+                        _isFiltered.value = true
+                    }
                 }
-            
-                viewModelScope.launch {
-                    val results = repository.searchByDate(query)
-                    _entries.value = applySortOrder(results, _sortOrder.value)
-                    _isFiltered.value = true
-                }
-            }
             </code></pre>
             
             <p>
-            Supports partial matches:
+                Supports partial matches:
             </p>
             
             <ul>
-            <li>"2024" → Returns all entries from that year</li>
-            <li>"2024-03" → Returns entries from March 2024</li>
+                <li>"2024" → Returns all entries from that year</li>
+                <li>"2024-03" → Returns entries from March 2024</li>
             </ul>
             
             <p><strong>Search Strategy:</strong> SQL LIKE pattern matching</p>
@@ -124,13 +124,13 @@
             <h3>In-Memory Sorting (Timsort)</h3>
             
             <pre><code>
-            fun toggleSortOrder() {
-                val newOrder = if (_sortOrder.value == SortOrder.ASCENDING)
-                    SortOrder.DESCENDING else SortOrder.ASCENDING
-            
-                _sortOrder.value = newOrder
-                _entries.value = applySortOrder(_entries.value, newOrder)
-            }
+                fun toggleSortOrder() {
+                    val newOrder = if (_sortOrder.value == SortOrder.ASCENDING)
+                        SortOrder.DESCENDING else SortOrder.ASCENDING
+                
+                    _sortOrder.value = newOrder
+                    _entries.value = applySortOrder(_entries.value, newOrder)
+                }
             </code></pre>
             
             <p><strong>Algorithm:</strong> Kotlin Timsort</p>
@@ -140,21 +140,21 @@
             <h3>Linear Search (Exact Date Match)</h3>
             
             <pre><code>
-            fun findFirstEntryByExactDate(date: String): WeightEntry? {
-                for (entry in _entries.value) {
-                    if (entry.date == date) return entry
+                fun findFirstEntryByExactDate(date: String): WeightEntry? {
+                    for (entry in _entries.value) {
+                        if (entry.date == date) return entry
+                    }
+                    return null
                 }
-                return null
-            }
             </code></pre>
             
             <p>
-            Best Case: O(1) <br>
-            Worst Case: O(n)
+                Best Case: O(1) <br>
+                Worst Case: O(n)
             </p>
             
             <p>
-            For larger datasets, a HashMap-based index could reduce lookup to O(1).
+                For larger datasets, a HashMap-based index could reduce lookup to O(1).
             </p>
         
         </section>
