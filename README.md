@@ -1,3 +1,7 @@
+include:
+  - firstpage.html
+  - aboutme.html
+
 <!DOCTYPE html>
 <html>
 <head>
