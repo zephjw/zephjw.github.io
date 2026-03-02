@@ -5,6 +5,5 @@ author: John Zephyr
 readme_index:
   enabled: false
   
-include:
-  _includes/aboutme.html
-  _includes/firstpage.html
+_includes/aboutme.html
+_includes/firstpage.html
