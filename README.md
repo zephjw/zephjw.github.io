@@ -1,11 +1,9 @@
+{{John Zephyr Porfolio}}
 
-<h1>The Weight Tracker: An Android Health Application</h1>
-
-
-<h4>John Zephyr</h4>
+<h2>The Weight Tracker: An Android Health Application</h2>
 
 <p>Software Design and Engineering</p>
-
+<p>
 ###### Android Health Application
 **Description**
 The Weight Tracker is an Android application built in Kotlin during my third year of the Computer Science program. Its purpose is to allow users to log their body weight over time, visualize trends via a line chart, and manage personal health data, including glucose, insulin, and sleep records. The application uses Android's Jetpack component suite, including Room for local persistence, Fragments for UI composition, and ViewModel for state management. The artifact selected for this category is the full application codebase, with specific focus on the Fragment layer, ViewModel, Repository pattern, and XML layout files.
@@ -169,3 +167,4 @@ In-memory sorting avoids repeated database queries when only order changes.
 #### - Use Case:
 >Quickly navigate to a specific record without querying the database again.
 Given that _entries. value is already a relatively small in-memory list, a linear search is more efficient than performing another database query. For larger datasets, a HashMap<String, WeightEntry> index could reduce lookup time to O(1).
+</p>
