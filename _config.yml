@@ -4,7 +4,3 @@ description: A portfolio showcasing the work of John Zephyr, a talented designer
 author: John Zephyr
 readme_index:
   enabled: false
-  
-include:  
-  _includes/aboutme.html
-  _includes/firstpage.html
