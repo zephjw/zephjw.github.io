@@ -1,5 +1,5 @@
 
-<h1>The Weight Tracker: An Android Health Application<h1>
+<h1>The Weight Tracker: An Android Health Application</h1>
 
 
 <h4>John Zephyr</h4>
