@@ -4,6 +4,6 @@ description: A portfolio showcasing the work of John Zephyr, a talented designer
 author: John Zephyr
 readme_index:
   enabled: false
-  
-'_includes/aboutme.html'
-'_includes/firstpage.html'
+include:  
+  '_includes/aboutme.html'
+  '_includes/firstpage.html'
