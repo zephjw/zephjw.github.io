@@ -1,4 +1,4 @@
-{{John Zephyr Porfolio}}
+{{John Zephyr Portfolio}}
 
 <h2>The Weight Tracker: An Android Health Application</h2>
 
@@ -168,3 +168,9 @@ In-memory sorting avoids repeated database queries when only order changes.
 >Quickly navigate to a specific record without querying the database again.
 Given that _entries. value is already a relatively small in-memory list, a linear search is more efficient than performing another database query. For larger datasets, a HashMap<String, WeightEntry> index could reduce lookup time to O(1).
 </p>
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+
+}
