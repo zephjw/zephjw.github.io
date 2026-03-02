@@ -1,6 +1,7 @@
-include:
-  - firstpage.html
-  - aboutme.html
+---
+layout: default
+title: Home
+---
 
 <!DOCTYPE html>
 <html>
@@ -156,4 +157,5 @@ In-memory sorting avoids repeated database queries when only order changes.
                 
 </html>
 
-
+{% include firstpage.html %}
+{% include aboutme.html %}
