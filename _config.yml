@@ -3,9 +3,6 @@ title: John Zephyr Portfolio
 description: A portfolio showcasing the work of John Zephyr.
 author: John Zephyr
 
-exclude:
-  - webServerApiSettings.json
-
 readme_index:
   enabled: false
 
