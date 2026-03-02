@@ -2,3 +2,5 @@ theme: jekyll-theme-minimal
 title: John Zephyr Portfolio
 description: A portfolio showcasing the work of John Zephyr, a talented designer and developer.
 author: John Zephyr
+readme_index:
+  enabled: false
