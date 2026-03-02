@@ -2,9 +2,9 @@
 <h1>The Weight Tracker: An Android Health Application<h1>
 
 
-## John Zephyr
+<h4>John Zephyr</h4>
 
-### **Software Design and Engineering**
+<p>Software Design and Engineering</p>
 
 ###### Android Health Application
 **Description**
